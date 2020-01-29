@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block nombre_titulo %}
+    Buscador
+{% endblock %}
+
+{% block contenido %}
+    <br>
+    <div class="container">
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th scope="col">Sujeto</th>
+            <th scope="col">Predicado</th>
+            <th scope="col">Objeto</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for node in  data%}
+                <tr>
+                {% for value in node %}
+                    {% if value[:4] == 'http' %}
+                        <td><a href="{{ value }}">{{ value }}</a></td>
+                    {% else %}
+                        <td>{{ value }}</td>
+                    {% endif %}
+                {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

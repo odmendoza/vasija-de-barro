@@ -9,7 +9,7 @@ app = Flask(__name__, static_url_path='/static/')
 
 password = os.getenv("NEO4J_PASSWORD")
 
-driver = GraphDatabase.driver('bolt://localhost:7687', auth=basic_auth("neo4j", '5zp8eguj'))
+driver = GraphDatabase.driver('bolt://localhost:7687', auth=basic_auth("neo4j", 'password'))
 
 
 def get_db():
@@ -38,8 +38,8 @@ def get_graph():
         print(q)
         db = get_db()
         results = db.run(
-            "MATCH (n)-[r:esUna]->(p:Persona) WHERE n.nombres =~ '(?i)%s.*' or n.apellidos =~ '(?i)%s.*' RETURN n as person" % (
-                str(q), str(q)))
+            "MATCH (n)-[r:esUna]->(p:Persona) WHERE n.nombres =~ '(?i)%s.*' or n.apellidos =~ '(?i)%s.*' "
+	    "RETURN n as person" % (str(q), str(q)))
         person = []
         for record in results:
             aux = []
